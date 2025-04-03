@@ -43,7 +43,7 @@ const SearchBar = () => {
             <SelectValue placeholder="Brand" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Brands</SelectItem>
+            <SelectItem value="all">All Brands</SelectItem>
             <SelectItem value="toyota">Toyota</SelectItem>
             <SelectItem value="honda">Honda</SelectItem>
             <SelectItem value="bmw">BMW</SelectItem>
@@ -61,7 +61,7 @@ const SearchBar = () => {
             <SelectValue placeholder="Price Range" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Any Price</SelectItem>
+            <SelectItem value="any">Any Price</SelectItem>
             <SelectItem value="0-5000">Under $5,000</SelectItem>
             <SelectItem value="5000-10000">$5,000 - $10,000</SelectItem>
             <SelectItem value="10000-20000">$10,000 - $20,000</SelectItem>
