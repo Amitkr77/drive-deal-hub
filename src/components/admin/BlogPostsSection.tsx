@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,7 +48,6 @@ const BlogPostsSection = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   
-  // Mock data for demonstration
   const posts = [
     { 
       id: 1, 
@@ -153,25 +151,21 @@ const BlogPostsSection = () => {
   };
 
   const handleSaveEdit = () => {
-    // In a real app, would save changes to the backend
     console.log("Saving changes to:", selectedPost);
     setIsEditModalOpen(false);
   };
 
   const handlePublish = () => {
-    // In a real app, would publish the post via the backend
     console.log(`Publishing post: ${selectedPost.title}`);
     setIsEditModalOpen(false);
   };
 
   const handleCreatePost = () => {
-    // In a real app, would create a new post in the backend
     console.log("Creating new post:", selectedPost);
     setIsCreateModalOpen(false);
   };
 
   const confirmDelete = () => {
-    // In a real app, would delete the post from the backend
     console.log("Deleting post:", selectedPost);
     setIsDeleteAlertOpen(false);
   };
@@ -191,6 +185,10 @@ const BlogPostsSection = () => {
   const removeTag = (tag, post) => {
     const updatedTags = post.tags.filter(t => t !== tag);
     setSelectedPost({ ...post, tags: updatedTags });
+  };
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = "https://via.placeholder.com/800x400?text=Image+Preview";
   };
 
   const PostForm = ({ post, isCreating = false }) => (
@@ -301,9 +299,7 @@ const BlogPostsSection = () => {
               src={post.image} 
               alt="Featured" 
               className="w-full h-full object-cover"
-              onError={(e) => {
-                e.target.src = "https://via.placeholder.com/800x400?text=Image+Preview";
-              }}
+              onError={handleImageError}
             />
           </div>
         </div>
@@ -397,7 +393,6 @@ const BlogPostsSection = () => {
         </Table>
       </div>
 
-      {/* View Post Modal */}
       <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
         <DialogContent className="sm:max-w-[700px]">
           <DialogHeader>
@@ -464,7 +459,6 @@ const BlogPostsSection = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Edit Post Modal */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
         <DialogContent className="sm:max-w-[700px]">
           <DialogHeader>
@@ -495,7 +489,6 @@ const BlogPostsSection = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Create Post Modal */}
       <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
         <DialogContent className="sm:max-w-[700px]">
           <DialogHeader>
@@ -524,7 +517,6 @@ const BlogPostsSection = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Delete Confirmation */}
       <AlertDialog open={isDeleteAlertOpen} onOpenChange={setIsDeleteAlertOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
