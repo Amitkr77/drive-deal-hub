@@ -37,7 +37,7 @@ const SearchBar = () => {
         />
       </div>
       
-      <div className="w-full md:w-40">
+      <div className="w-full md:w-40 text-black">
         <Select value={brand} onValueChange={setBrand}>
           <SelectTrigger>
             <SelectValue placeholder="Brand" />
@@ -55,7 +55,7 @@ const SearchBar = () => {
         </Select>
       </div>
       
-      <div className="w-full md:w-40">
+      <div className="w-full md:w-40 text-black">
         <Select value={priceRange} onValueChange={setPriceRange}>
           <SelectTrigger>
             <SelectValue placeholder="Price Range" />

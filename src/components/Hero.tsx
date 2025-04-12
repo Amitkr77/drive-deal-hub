@@ -34,7 +34,7 @@ const Hero = () => {
             <Link to="/cars" className="btn-primary text-center">
               Browse All Cars
             </Link>
-            <Link to="/sell-car" className="btn-outline border-white text-white hover:bg-white/10 text-center">
+            <Link to="/sell-car" className="btn-outline border-white text-white bg-white/10 hover:bg-white hover:text-black text-center">
               Sell Your Car
             </Link>
           </div>
