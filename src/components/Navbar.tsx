@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, User, Car, Heart, Search } from 'lucide-react';
+import { Menu, User, Car, Heart, Search, FileText, HelpCircle, Info } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +21,9 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-6">
             <Link to="/cars" className="text-foreground hover:text-accent transition-colors">Browse Cars</Link>
             <Link to="/sell-car" className="text-foreground hover:text-accent transition-colors">Sell Your Car</Link>
-            <Link to="/dashboard" className="text-foreground hover:text-accent transition-colors">Dashboard</Link>
+            <Link to="/blog" className="text-foreground hover:text-accent transition-colors">Blog</Link>
+            <Link to="/about-us" className="text-foreground hover:text-accent transition-colors">About Us</Link>
+            <Link to="/contact-us" className="text-foreground hover:text-accent transition-colors">Contact</Link>
           </div>
           
           {/* Auth Buttons (Desktop) */}
@@ -71,6 +73,36 @@ const Navbar = () => {
                 <div className="flex items-center space-x-2">
                   <Car className="h-5 w-5" />
                   <span>Sell Your Car</span>
+                </div>
+              </Link>
+              <Link 
+                to="/blog" 
+                className="px-2 py-1 rounded-md hover:bg-secondary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="flex items-center space-x-2">
+                  <FileText className="h-5 w-5" />
+                  <span>Blog</span>
+                </div>
+              </Link>
+              <Link 
+                to="/about-us" 
+                className="px-2 py-1 rounded-md hover:bg-secondary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="flex items-center space-x-2">
+                  <Info className="h-5 w-5" />
+                  <span>About Us</span>
+                </div>
+              </Link>
+              <Link 
+                to="/contact-us" 
+                className="px-2 py-1 rounded-md hover:bg-secondary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <div className="flex items-center space-x-2">
+                  <HelpCircle className="h-5 w-5" />
+                  <span>Contact</span>
                 </div>
               </Link>
               <Link 
