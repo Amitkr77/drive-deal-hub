@@ -18,12 +18,10 @@ const Navbar = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
-            <Link to="/cars" className="text-foreground hover:text-accent transition-colors">Browse Cars</Link>
-            <Link to="/sell-car" className="text-foreground hover:text-accent transition-colors">Sell Your Car</Link>
+          <div className="hidden md:flex items-center space-x-6 uppercase">
+            <Link to="/cars" className="text-foreground hover:text-accent transition-colors">Explore</Link>
             <Link to="/blog" className="text-foreground hover:text-accent transition-colors">Blog</Link>
             <Link to="/about-us" className="text-foreground hover:text-accent transition-colors">About Us</Link>
-            <Link to="/contact-us" className="text-foreground hover:text-accent transition-colors">Contact</Link>
           </div>
           
           {/* Auth Buttons (Desktop) */}

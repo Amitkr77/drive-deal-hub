@@ -21,9 +21,9 @@ export const DashboardTabs = ({
   onDeleteListing
 }: DashboardTabsProps) => {
   return (
-    <Tabs defaultValue="listings" className="w-full">
-      <TabsList className="grid grid-cols-2 mb-8">
-        <TabsTrigger value="listings" className="text-base">
+    <Tabs defaultValue="listings" className="w-full ">
+      <TabsList className="grid grid-cols-2 mb-8 ">
+        <TabsTrigger value="listings" className="text-base  ">
           <Car className="h-4 w-4 mr-2" />
           My Listings
         </TabsTrigger>
