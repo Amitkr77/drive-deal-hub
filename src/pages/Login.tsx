@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -18,6 +18,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useAuth } from '@/context/AuthContext';
+import { Loader2 } from 'lucide-react';
 
 // Login form schema
 const loginSchema = z.object({
@@ -41,9 +43,10 @@ type LoginValues = z.infer<typeof loginSchema>;
 type RegisterValues = z.infer<typeof registerSchema>;
 
 const Login = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
+  const { login, register: registerUser } = useAuth();
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Login form
   const loginForm = useForm<LoginValues>({
@@ -66,34 +69,45 @@ const Login = () => {
   });
   
   // Handle login form submission
-  const onLoginSubmit = (values: LoginValues) => {
-    console.log('Login values:', values);
-    
-    // Simulate login
-    toast({
-      title: "Login successful",
-      description: "Welcome back to DriveDealHub!",
-    });
-    
-    navigate('/dashboard');
+  const onLoginSubmit = async (values: LoginValues) => {
+    setIsSubmitting(true);
+    try {
+      await login(values.email, values.password);
+      // Navigation is handled in the AuthContext
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   // Handle register form submission
-  const onRegisterSubmit = (values: RegisterValues) => {
-    console.log('Register values:', values);
-    
-    // Simulate registration
-    toast({
-      title: "Registration successful",
-      description: "Your account has been created!",
-    });
-    
-    navigate('/dashboard');
+  const onRegisterSubmit = async (values: RegisterValues) => {
+    setIsSubmitting(true);
+    try {
+      await registerUser(values.name, values.email, values.password);
+      // Navigation is handled in the AuthContext
+    } catch (error) {
+      console.error('Registration error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   // Handle tab change
   const handleTabChange = (value: string) => {
     setActiveTab(value as "login" | "register");
+  };
+
+  // Demo credentials helper
+  const fillDemoCredentials = (role: 'admin' | 'user') => {
+    if (role === 'admin') {
+      loginForm.setValue('email', 'admin@example.com');
+      loginForm.setValue('password', 'admin123');
+    } else {
+      loginForm.setValue('email', 'john@example.com');
+      loginForm.setValue('password', 'password123');
+    }
   };
 
   return (
@@ -154,11 +168,40 @@ const Login = () => {
                         )}
                       />
                       
-                      <Button type="submit" className="w-full bg-accent text-white hover:bg-accent/90">
-                        Login
+                      <Button type="submit" className="w-full bg-accent text-white hover:bg-accent/90" disabled={isSubmitting}>
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Logging in...
+                          </>
+                        ) : (
+                          "Login"
+                        )}
                       </Button>
                     </form>
                   </Form>
+                  
+                  <div className="mt-4 space-y-2">
+                    <p className="text-sm text-center text-muted-foreground">Demo accounts:</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="text-xs"
+                        onClick={() => fillDemoCredentials('admin')}
+                      >
+                        Use Admin Account
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="text-xs"
+                        onClick={() => fillDemoCredentials('user')}
+                      >
+                        Use User Account
+                      </Button>
+                    </div>
+                  </div>
                   
                   <div className="mt-6 text-center">
                     <p className="text-muted-foreground text-sm">Don't have an account?</p>
@@ -232,8 +275,15 @@ const Login = () => {
                         )}
                       />
                       
-                      <Button type="submit" className="w-full bg-accent text-white hover:bg-accent/90">
-                        Create Account
+                      <Button type="submit" className="w-full bg-accent text-white hover:bg-accent/90" disabled={isSubmitting}>
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Creating Account...
+                          </>
+                        ) : (
+                          "Create Account"
+                        )}
                       </Button>
                     </form>
                   </Form>
