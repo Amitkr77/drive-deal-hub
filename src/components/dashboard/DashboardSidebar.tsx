@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -20,10 +19,9 @@ import {
 } from 'lucide-react';
 import { toast } from "@/hooks/use-toast";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 
-// Component types
 type UserData = {
   name: string;
   email: string;
@@ -114,7 +112,6 @@ export const DashboardSidebar = ({
 
   return (
     <div className="md:w-1/4 space-y-6">
-      {/* User Profile Card */}
       <Card>
         <CardContent className="p-6">
           <div className="flex flex-col items-center text-center mb-6">
@@ -298,7 +295,6 @@ export const DashboardSidebar = ({
         </CardContent>
       </Card>
       
-      {/* Stats Card */}
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-lg">Your Stats</CardTitle>
@@ -349,7 +345,6 @@ export const DashboardSidebar = ({
         </CardContent>
       </Card>
       
-      {/* Recent Activity Card */}
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="text-lg">Recent Activity</CardTitle>
